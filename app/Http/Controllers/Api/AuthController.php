@@ -41,8 +41,8 @@ class AuthController extends Controller
     }
     public function login(Request $request) {
         $request->validate([
-            'nickname' => 'required|string|max:25e',
-            'password' => 'required|string|min:8'
+            'nickname' => 'required|string',
+            'password' => 'required|string'
         ]);   
         $user = User::where('nickname', $request->nickname)->first();
 
