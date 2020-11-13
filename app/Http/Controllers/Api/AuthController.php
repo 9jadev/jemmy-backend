@@ -35,6 +35,10 @@ class AuthController extends Controller
         $user = User::find($id);
         return $user;
     }
+    public function logout() {
+        Auth::user()->tokens()->where('id', $id)->delete();
+        return response(["status" => "loggedout"]);
+    }
     public function login(Request $request) {
         $request->validate([
             'nickname' => 'required|string|max:25e',
