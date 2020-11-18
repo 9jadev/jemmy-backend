@@ -25,6 +25,6 @@ Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:sanctum');
 
 Route::get('/getlogin', 'Api\AuthController@getdata')->middleware('auth:sanctum');
 
-// Route::get('/review', 'Api\ReviewController@review')->middleware('auth:sanctum');
-Route::apiResource('/review', 'Api\ReviewController')->middleware('auth:sanctum', [ 'except' => [ 'store' ]]);
-
+Route::get('/review', 'Api\ReviewController@index')->middleware('auth:sanctum');
+// Route::apiResource('/review', 'Api\ReviewController')->middleware('auth:sanctum', ['only' => ['store']]);
+Route::post('/review/{id}', 'Api\ReviewController@store');

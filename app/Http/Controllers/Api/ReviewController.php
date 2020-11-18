@@ -20,21 +20,10 @@ class ReviewController extends Controller
     {
       
         $id = Auth::id();
-		// return BusinessResource::collection(User::find($id)->Business);
-        $business =  User::find($id)->Business;
+
         $inv = User::find($id)->reviews;
 
         return response(['review' => $inv, 'status' => true]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
     }
 
     /**
@@ -43,64 +32,21 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $id = Auth::id();
-		$request->user_id = $id;
+        $inv = User::where('nickname', $id)->first();
+        // $id = $inv->i;
+        // $request->user_id = $id;
+        
         $request->validate([
             'review' => 'required|string|min:25',
         ]);
         $review = Review::create([
-            'user_id' => $request->user_id,
+            'user_id' => $inv->id,
             'review' => $request->review
         ]);
         return response(['review' => $review, 'status' => true]);
-
-        // return 132;
+        // return $inv;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Review $review)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Review $review)
-    {
-        //
-    }
 }
