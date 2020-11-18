@@ -28,4 +28,3 @@ Route::get('/getlogin', 'Api\AuthController@getdata')->middleware('auth:sanctum'
 // Route::get('/review', 'Api\ReviewController@review')->middleware('auth:sanctum');
 Route::apiResource('/review', 'Api\ReviewController')->middleware('auth:sanctum', [ 'except' => [ 'store' ]]);
 
-Route::post('/review', '')
